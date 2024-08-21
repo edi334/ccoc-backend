@@ -1,0 +1,3 @@
+[submodule "MCMS"]
+	path = MCMS
+	url = https://git.tdrs.ro/MCMS/mcms
