@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\MCMS\MCMS.Common\MCMS.Common.csproj" />
+      <ProjectReference Include="..\MCMS\MCMS.Files\MCMS.Files.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -16,6 +17,10 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Stacks\" />
     </ItemGroup>
 
 </Project>

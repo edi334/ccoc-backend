@@ -3,6 +3,7 @@ using System;
 using CCOCBackend.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CCOCBackend.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240822185200_AddedSomeEntities")]
+    partial class AddedSomeEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,39 +25,7 @@ namespace CCOCBackend.API.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("CCOCBackend.API.Stacks.ArticleTags.ArticleTagEntity", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("text");
-
-                    b.Property<string>("ArticleId")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("TagId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Updated")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ArticleId");
-
-                    b.HasIndex("Created");
-
-                    b.HasIndex("TagId");
-
-                    b.HasIndex("Updated");
-
-                    b.ToTable("ArticleTags", (string)null);
-                });
-
-            modelBuilder.Entity("CCOCBackend.API.Stacks.Articles.ArticleEntity", b =>
+            modelBuilder.Entity("CCOCBackend.API.Articles.ArticleEntity", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -92,7 +63,7 @@ namespace CCOCBackend.API.Migrations
                     b.ToTable("Articles", (string)null);
                 });
 
-            modelBuilder.Entity("CCOCBackend.API.Stacks.CarouselPages.CarouselPageEntity", b =>
+            modelBuilder.Entity("CCOCBackend.API.CarouselPages.CarouselPageEntity", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -105,7 +76,6 @@ namespace CCOCBackend.API.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("ImageId")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
@@ -126,7 +96,7 @@ namespace CCOCBackend.API.Migrations
                     b.ToTable("CarouselPages", (string)null);
                 });
 
-            modelBuilder.Entity("CCOCBackend.API.Stacks.MenuItems.MenuItemEntity", b =>
+            modelBuilder.Entity("CCOCBackend.API.MenuItems.MenuItemEntity", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -164,189 +134,7 @@ namespace CCOCBackend.API.Migrations
                     b.ToTable("MenuItems", (string)null);
                 });
 
-            modelBuilder.Entity("CCOCBackend.API.Stacks.People.PersonEntity", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("ImageId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Information")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Updated")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Created");
-
-                    b.HasIndex("ImageId");
-
-                    b.HasIndex("Updated");
-
-                    b.ToTable("People", (string)null);
-                });
-
-            modelBuilder.Entity("CCOCBackend.API.Stacks.ProjectEditions.ProjectEditionEntity", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("ProjectId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Updated")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Created");
-
-                    b.HasIndex("ProjectId");
-
-                    b.HasIndex("Updated");
-
-                    b.ToTable("ProjectEditions", (string)null);
-                });
-
-            modelBuilder.Entity("CCOCBackend.API.Stacks.Projects.ProjectEntity", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Updated")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Created");
-
-                    b.HasIndex("Updated");
-
-                    b.ToTable("Projects", (string)null);
-                });
-
-            modelBuilder.Entity("CCOCBackend.API.Stacks.Reports.ReportEntity", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("FileId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("Updated")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Year")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Created");
-
-                    b.HasIndex("FileId");
-
-                    b.HasIndex("Updated");
-
-                    b.ToTable("Reports", (string)null);
-                });
-
-            modelBuilder.Entity("CCOCBackend.API.Stacks.Services.ServiceEntity", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Updated")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Created");
-
-                    b.HasIndex("Updated");
-
-                    b.ToTable("Services", (string)null);
-                });
-
-            modelBuilder.Entity("CCOCBackend.API.Stacks.Settings.SettingEntity", b =>
+            modelBuilder.Entity("CCOCBackend.API.Settings.SettingEntity", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
@@ -373,36 +161,6 @@ namespace CCOCBackend.API.Migrations
                     b.HasIndex("Updated");
 
                     b.ToTable("Settings", (string)null);
-                });
-
-            modelBuilder.Entity("CCOCBackend.API.Stacks.Tags.TagEntity", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("IconId")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Updated")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Created");
-
-                    b.HasIndex("IconId");
-
-                    b.HasIndex("Updated");
-
-                    b.ToTable("Tags", (string)null);
                 });
 
             modelBuilder.Entity("MCMS.Base.Auth.Role", b =>
@@ -776,24 +534,7 @@ namespace CCOCBackend.API.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("CCOCBackend.API.Stacks.ArticleTags.ArticleTagEntity", b =>
-                {
-                    b.HasOne("CCOCBackend.API.Stacks.Articles.ArticleEntity", "Article")
-                        .WithMany()
-                        .HasForeignKey("ArticleId");
-
-                    b.HasOne("CCOCBackend.API.Stacks.Tags.TagEntity", "Tag")
-                        .WithMany()
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Article");
-
-                    b.Navigation("Tag");
-                });
-
-            modelBuilder.Entity("CCOCBackend.API.Stacks.Articles.ArticleEntity", b =>
+            modelBuilder.Entity("CCOCBackend.API.Articles.ArticleEntity", b =>
                 {
                     b.HasOne("MCMS.Files.Models.FileEntity", "Image")
                         .WithMany()
@@ -804,68 +545,24 @@ namespace CCOCBackend.API.Migrations
                     b.Navigation("Image");
                 });
 
-            modelBuilder.Entity("CCOCBackend.API.Stacks.CarouselPages.CarouselPageEntity", b =>
+            modelBuilder.Entity("CCOCBackend.API.CarouselPages.CarouselPageEntity", b =>
                 {
                     b.HasOne("MCMS.Files.Models.FileEntity", "Image")
                         .WithMany()
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ImageId");
 
                     b.Navigation("Image");
                 });
 
-            modelBuilder.Entity("CCOCBackend.API.Stacks.MenuItems.MenuItemEntity", b =>
+            modelBuilder.Entity("CCOCBackend.API.MenuItems.MenuItemEntity", b =>
                 {
-                    b.HasOne("CCOCBackend.API.Stacks.MenuItems.MenuItemEntity", "Parent")
+                    b.HasOne("CCOCBackend.API.MenuItems.MenuItemEntity", "Parent")
                         .WithMany()
                         .HasForeignKey("ParentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Parent");
-                });
-
-            modelBuilder.Entity("CCOCBackend.API.Stacks.People.PersonEntity", b =>
-                {
-                    b.HasOne("MCMS.Files.Models.FileEntity", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Image");
-                });
-
-            modelBuilder.Entity("CCOCBackend.API.Stacks.ProjectEditions.ProjectEditionEntity", b =>
-                {
-                    b.HasOne("CCOCBackend.API.Stacks.Projects.ProjectEntity", "Project")
-                        .WithMany()
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Project");
-                });
-
-            modelBuilder.Entity("CCOCBackend.API.Stacks.Reports.ReportEntity", b =>
-                {
-                    b.HasOne("MCMS.Files.Models.FileEntity", "File")
-                        .WithMany()
-                        .HasForeignKey("FileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("File");
-                });
-
-            modelBuilder.Entity("CCOCBackend.API.Stacks.Tags.TagEntity", b =>
-                {
-                    b.HasOne("MCMS.Files.Models.FileEntity", "Icon")
-                        .WithMany()
-                        .HasForeignKey("IconId");
-
-                    b.Navigation("Icon");
                 });
 
             modelBuilder.Entity("MCMS.Base.Auth.UserRole", b =>
