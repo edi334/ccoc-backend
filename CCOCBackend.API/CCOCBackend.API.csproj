@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\MCMS\MCMS.Auth\MCMS.Auth.csproj" />
       <ProjectReference Include="..\MCMS\MCMS.Common\MCMS.Common.csproj" />
       <ProjectReference Include="..\MCMS\MCMS.Files\MCMS.Files.csproj" />
     </ItemGroup>

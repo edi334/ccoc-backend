@@ -1,5 +1,6 @@
 using CCOCBackend.API;
 using CCOCBackend.API.Data;
+using MCMS.Auth;
 using MCMS.Base.Helpers;
 using MCMS.Base.SwaggerFormly.Models;
 using MCMS.Builder;
@@ -12,13 +13,20 @@ var builder = WebApplication.CreateBuilder(args);
 var mAppBuilder = new MAppBuilder(builder.Environment);
 
 mAppBuilder = mAppBuilder.AddSpecifications<MCommonSpecifications>()
+    .AddSpecifications<MJwtAuthSpecifications>()
     //.AddSpecifications<MEmailingSpecifications>()
     //.AddSpecifications<MLoggingSpecifications>()
     .AddSpecifications<CCOCBackendSpecifications>()
     .WithPostgres<AppDbContext>()
     .WithSwagger(new SwaggerConfigOptions
     {
-        Title = "CCOC Backend",
+        Title = "CCOC Admin",
+        Version = "v1",
+        UiType = DocsUiType.Both
+    },
+    new SwaggerConfigOptions
+    {
+        Title = "CCOC API",
         Version = "v1",
         UiType = DocsUiType.Both
     });
