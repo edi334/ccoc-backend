@@ -7,10 +7,16 @@
         <InvariantGlobalization>true</InvariantGlobalization>
     </PropertyGroup>
 
-    <ItemGroup>
+    <ItemGroup Condition="$(ENV_TYPE) != 'CI_BUILD'">
       <ProjectReference Include="..\MCMS\MCMS.Auth\MCMS.Auth.csproj" />
       <ProjectReference Include="..\MCMS\MCMS.Common\MCMS.Common.csproj" />
       <ProjectReference Include="..\MCMS\MCMS.Files\MCMS.Files.csproj" />
+    </ItemGroup>
+
+    <ItemGroup Condition="$(ENV_TYPE) == 'CI_BUILD'">
+        <PackageReference Include="MCMS.Auth" Version="0.8.6" />
+        <PackageReference Include="MCMS.Common" Version="0.8.6" />
+        <PackageReference Include="MCMS.Files" Version="0.8.6" />
     </ItemGroup>
 
     <ItemGroup>
@@ -23,9 +29,4 @@
     <ItemGroup>
       <Folder Include="Stacks\" />
     </ItemGroup>
-
-    <ItemGroup>
-      <None Remove="Properties\launchSettings.json" />
-    </ItemGroup>
-
 </Project>
