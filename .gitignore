@@ -560,3 +560,4 @@ modules.xml
 # End of https://www.toptal.com/developers/gitignore/api/aspnetcore,jetbrains,jetbrains+iml,jetbrains+all,rider,dotnetcore
 
 .local.env
+.docker.env

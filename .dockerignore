@@ -1,0 +1,11 @@
+.git
+.gitlab-ci.yml
+
+Dockerfile
+docker-compose.yml
+
+MCMS/
+**/bin/
+**/obj/
+
+persisted/
