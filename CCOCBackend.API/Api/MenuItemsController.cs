@@ -22,7 +22,7 @@ public class MenuItemsController : ApiController
         Repo.ChainQueryable(q => q.Include(mi => mi.Parent));
     }
     
-    [HttpGet]
+    [HttpGet("GetAll")]
     [AllowAnonymous]
     public async Task<ActionResult> Get()
     {

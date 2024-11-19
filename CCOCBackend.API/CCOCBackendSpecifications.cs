@@ -39,59 +39,59 @@ public class CCOCBackendSpecifications : MSpecifications
     {
         config.Add(new MenuSection
         {
-            Name = "Administration",
+            Name = "Administrare Site",
             Id = "Administration",
             IsCollapsable = true,
             Items =
             {
-                new MenuLink("Users", typeof(AdminUsersUiController)).WithIconClasses("fas fa-users"),
-                new MenuLink("Settings", typeof(SettingsUiController)).WithIconClasses("fas fa-gear"),
-                new MenuLink("Menu Items", typeof(MenuItemsUiController)).WithIconClasses("fas fa-bars")
+                new MenuLink("Utilizatori", typeof(AdminUsersUiController)).WithIconClasses("fas fa-users"),
+                new MenuLink("Setări", typeof(SettingsUiController)).WithIconClasses("fas fa-gear"),
+                new MenuLink("Meniu", typeof(MenuItemsUiController)).WithIconClasses("fas fa-bars")
             }
         }.RequiresRoles("Admin"));
         config.Add(new MenuSection
         {
-            Name = "Projects",
+            Name = "Proiecte",
             Id = "Projects",
             IsCollapsable = true,
             Items =
             {
-                new MenuLink("Projects", typeof(ProjectsUiController)).WithIconClasses("fas fa-diagram-project"),
-                new MenuLink("Project Editions", typeof(ProjectEditionsUiController)).WithIconClasses("fas fa-grid")
+                new MenuLink("Proiecte", typeof(ProjectsUiController)).WithIconClasses("fas fa-diagram-project"),
+                new MenuLink("Ediții", typeof(ProjectEditionsUiController)).WithIconClasses("fas fa-table")
             }
         }.RequiresRoles("Admin"));
         config.Add(new MenuSection
         {
-            Name = "Articles",
+            Name = "Anunțuri",
             Id = "Articles",
             IsCollapsable = true,
             Items =
             {
-                new MenuLink("Articles", typeof(ArticlesUiController)).WithIconClasses("fas fa-newspaper"),
-                new MenuLink("Tags", typeof(TagsUiController)).WithIconClasses("fas fa-tags"),
-                new MenuLink("Article Tags", typeof(ArticleTagsUiController)).WithIconClasses("fas fa-paperclip")
+                new MenuLink("Anunțuri", typeof(ArticlesUiController)).WithIconClasses("fas fa-newspaper"),
+                new MenuLink("Categorii", typeof(TagsUiController)).WithIconClasses("fas fa-tags"),
+                new MenuLink("Articole-Categorii", typeof(ArticleTagsUiController)).WithIconClasses("fas fa-paperclip")
             }
         }.RequiresRoles("Admin"));
         config.Add(new MenuSection
         {
-            Name = "Reports",
+            Name = "Rapoarte",
             Id = "Reports",
             IsCollapsable = true,
             Items =
             {
-                new MenuLink("Reports", typeof(ReportsUiController)).WithIconClasses("fas fa-chart-line")
+                new MenuLink("Rapoarte", typeof(ReportsUiController)).WithIconClasses("fas fa-chart-line")
             }
         }.RequiresRoles("Admin"));
         config.Add(new MenuSection
         {
-            Name = "Other website content",
+            Name = "Alt conținut",
             Id = "Content",
             IsCollapsable = true,
             Items =
             {
-                new MenuLink("Main Page Carousel", typeof(CarouselPagesUiController)).WithIconClasses("fas fa-gallery-thumbnails"),
-                new MenuLink("CCOC Services", typeof(ServicesUiController)).WithIconClasses("fas fa-handshake"),
-                new MenuLink("CCOC People", typeof(PeopleUiController)).WithIconClasses("fas fa-people")
+                new MenuLink("Carusel", typeof(CarouselPagesUiController)).WithIconClasses("fas fa-water"),
+                new MenuLink("Servicii", typeof(ServicesUiController)).WithIconClasses("fas fa-handshake"),
+                new MenuLink("Oameni", typeof(PeopleUiController)).WithIconClasses("fas fa-person")
             }
         }.RequiresRoles("Admin"));
     }

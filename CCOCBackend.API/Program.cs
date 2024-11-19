@@ -5,6 +5,7 @@ using MCMS.Base.Helpers;
 using MCMS.Base.SwaggerFormly.Models;
 using MCMS.Builder;
 using MCMS.Common;
+using MCMS.Files;
 
 Env.LoadEnvFiles();
 
@@ -14,6 +15,7 @@ var mAppBuilder = new MAppBuilder(builder.Environment);
 
 mAppBuilder = mAppBuilder.AddSpecifications<MCommonSpecifications>()
     .AddSpecifications<MJwtAuthSpecifications>()
+    .AddSpecifications<MFilesSpecifications>()
     //.AddSpecifications<MEmailingSpecifications>()
     //.AddSpecifications<MLoggingSpecifications>()
     .AddSpecifications<CCOCBackendSpecifications>()
