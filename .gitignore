@@ -561,3 +561,4 @@ modules.xml
 
 .local.env
 .docker.env
+persisted

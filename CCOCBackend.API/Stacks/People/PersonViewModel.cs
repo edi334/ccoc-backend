@@ -20,9 +20,9 @@ public class PersonViewModel : ViewModel
     public string Email { get; set; }
 
     public string Information { get; set; }
-
-    public string Role { get; set; }
-
+    
+    public PersonType PersonType { get; set; }
+    
     public override string ToString()
     {
         return Id;

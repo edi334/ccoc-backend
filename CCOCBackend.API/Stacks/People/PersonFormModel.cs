@@ -18,8 +18,8 @@ public class PersonFormModel : IFormModel
 
     public string Email { get; set; }
 
+    public PersonType Type { get; set; }
+    
     [FormlyCkEditor]
     public string Information { get; set; }
-
-    public string Role { get; set; }
 }

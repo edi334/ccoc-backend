@@ -3,8 +3,10 @@ using CCOCBackend.API.Stacks.ArticleTags;
 using CCOCBackend.API.Stacks.CarouselPages;
 using CCOCBackend.API.Stacks.MenuItems;
 using CCOCBackend.API.Stacks.People;
+using CCOCBackend.API.Stacks.PersonTags;
 using CCOCBackend.API.Stacks.ProjectEditions;
 using CCOCBackend.API.Stacks.Projects;
+using CCOCBackend.API.Stacks.PTags;
 using CCOCBackend.API.Stacks.Reports;
 using CCOCBackend.API.Stacks.Services;
 using CCOCBackend.API.Stacks.Settings;
@@ -74,6 +76,18 @@ public class CCOCBackendSpecifications : MSpecifications
         }.RequiresRoles("Admin"));
         config.Add(new MenuSection
         {
+            Name = "Oameni",
+            Id = "People",
+            IsCollapsable = true,
+            Items =
+            {
+                new MenuLink("Oameni", typeof(PeopleUiController)).WithIconClasses("fas fa-newspaper"),
+                new MenuLink("Categorii", typeof(PTagsUiController)).WithIconClasses("fas fa-tags"),
+                new MenuLink("Oameni-Categorii", typeof(PersonTagsUiController)).WithIconClasses("fas fa-paperclip")
+            }
+        }.RequiresRoles("Admin"));
+        config.Add(new MenuSection
+        {
             Name = "Rapoarte",
             Id = "Reports",
             IsCollapsable = true,
@@ -91,7 +105,6 @@ public class CCOCBackendSpecifications : MSpecifications
             {
                 new MenuLink("Carusel", typeof(CarouselPagesUiController)).WithIconClasses("fas fa-water"),
                 new MenuLink("Servicii", typeof(ServicesUiController)).WithIconClasses("fas fa-handshake"),
-                new MenuLink("Oameni", typeof(PeopleUiController)).WithIconClasses("fas fa-person")
             }
         }.RequiresRoles("Admin"));
     }
