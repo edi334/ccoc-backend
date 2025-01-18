@@ -3,26 +3,21 @@ using MCMS.Base.Data.ViewModels;
 using MCMS.Files.Models;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 using MCMS.Base.Display.ModelDisplay;
 using MCMS.Base.Display.ModelDisplay.Attributes;
 
-namespace CCOCBackend.API.Stacks.CarouselPages;
-[Display(Name = "CarouselPage")]
-public class CarouselPageViewModel : ViewModel
+namespace CCOCBackend.API.Stacks.Shortcuts;
+[Display(Name = "Shortcut")]
+public class ShortcutViewModel : ViewModel
 {
     [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
     [DetailsField]
-    public string Enabled { get; set; }
+    public bool Enabled { get; set; }
     
     [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
     [DetailsField]
     public string Name { get; set; }
-    
-    [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
-    [DetailsField]
-    public string Description { get; set; }
-    
+
     [DetailsField(Hidden = true)]
     [JsonIgnore]
     public FileViewModel Image { get; set; }
@@ -32,7 +27,11 @@ public class CarouselPageViewModel : ViewModel
     [DetailsField]
     public string ImageDisplay => 
         $"<img src='{(string.IsNullOrEmpty(Image?.Url) ? "/img/device-placeholder.svg" : Image.Url)}' alt=' ' class='thumb-image' />";
-    
+
+    [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
+    [DetailsField]
+    public string Link { get; set; }
+
     public override string ToString()
     {
         return Id;

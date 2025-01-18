@@ -3,6 +3,7 @@ using System;
 using CCOCBackend.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CCOCBackend.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250118150425_AddedCarouselPageDescription")]
+    partial class AddedCarouselPageDescription
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -410,41 +413,6 @@ namespace CCOCBackend.API.Migrations
                     b.HasIndex("Updated");
 
                     b.ToTable("Settings", (string)null);
-                });
-
-            modelBuilder.Entity("CCOCBackend.API.Stacks.Shortcuts.ShortcutEntity", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("ImageId")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Link")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Updated")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Created");
-
-                    b.HasIndex("ImageId");
-
-                    b.HasIndex("Updated");
-
-                    b.ToTable("Shortcuts", (string)null);
                 });
 
             modelBuilder.Entity("CCOCBackend.API.Stacks.Tags.TagEntity", b =>
@@ -982,15 +950,6 @@ namespace CCOCBackend.API.Migrations
                         .HasForeignKey("FileId");
 
                     b.Navigation("File");
-                });
-
-            modelBuilder.Entity("CCOCBackend.API.Stacks.Shortcuts.ShortcutEntity", b =>
-                {
-                    b.HasOne("MCMS.Files.Models.FileEntity", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageId");
-
-                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("CCOCBackend.API.Stacks.Tags.TagEntity", b =>

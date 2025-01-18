@@ -1,5 +1,5 @@
 using CCOCBackend.API.Api.Dtos;
-using CCOCBackend.API.Stacks.CarouselPages;
+using CCOCBackend.API.Stacks.Shortcuts;
 using MCMS.Auth.Controllers;
 using MCMS.Base.Attributes;
 using MCMS.Base.Data;
@@ -12,26 +12,26 @@ using Microsoft.EntityFrameworkCore;
 namespace CCOCBackend.API.Api;
 
 [ApiRoute("[controller]")]
-public class CarouselPagesController : ApiController
+public class ShortcutsController : ApiController
 {
-    private IRepository<CarouselPageEntity> Repo => ServiceProvider.Repo<CarouselPageEntity>();
-
+    private IRepository<ShortcutEntity> Repo => ServiceProvider.Repo<ShortcutEntity>();
+    
     public override void OnActionExecuting(ActionExecutingContext context)
     {
         base.OnActionExecuting(context);
         Repo.ChainQueryable(p => p.Include(a => a.Image));
     }
-    
+
     [HttpGet("GetAll")]
     [AllowAnonymous]
     public async Task<ActionResult> Get()
     {
-        var pages = await Repo.GetAll(p => p.Enabled);
-        var result = pages
-            .Select(p => new CarouselPageDto
+        var shortcuts = await Repo.GetAll(p => p.Enabled);
+        var result = shortcuts
+            .Select(p => new ShortcutDto
             {
                 Name = p.Name,
-                Description = p.Description,
+                Link = p.Link,
                 Image = p.Image?.PhysicalFullPath,
             });
 

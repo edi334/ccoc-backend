@@ -10,6 +10,7 @@ using CCOCBackend.API.Stacks.PTags;
 using CCOCBackend.API.Stacks.Reports;
 using CCOCBackend.API.Stacks.Services;
 using CCOCBackend.API.Stacks.Settings;
+using CCOCBackend.API.Stacks.Shortcuts;
 using CCOCBackend.API.Stacks.Tags;
 using MCMS.Admin.Users;
 using MCMS.Base.Builder;
@@ -105,6 +106,7 @@ public class CCOCBackendSpecifications : MSpecifications
             {
                 new MenuLink("Carusel", typeof(CarouselPagesUiController)).WithIconClasses("fas fa-water"),
                 new MenuLink("Servicii", typeof(ServicesUiController)).WithIconClasses("fas fa-handshake"),
+                new MenuLink("Shortcuts", typeof(ShortcutsUiController)).WithIconClasses("fas fa-link")
             }
         }.RequiresRoles("Admin"));
     }
