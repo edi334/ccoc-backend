@@ -28,47 +28,33 @@ public class ArticlesController : ApiController
 
     [HttpGet("GetAll")]
     [AllowAnonymous]
-    public async Task<ActionResult> Get()
+    public async Task<ActionResult> Get([FromQuery] int? count = null)
     {
         var articles = await Repo.GetAll();
 
-        var result = articles
+        var sortedArticles = articles
             .OrderByDescending(a => a.PublishDate)
-            .Select(a => new ArticleDto 
+            .Select(a => new ArticleDto
                 {
                     Title = a.Title,
                     Image = a.Image?.PhysicalFullPath,
                     Content = a.Content,
-                    PublishDate = a.PublishDate
+                    PublishDate = a.PublishDate,
+                    Slug = a.Slug
                 }
             );
 
-        return Ok(result);
-    }
+        if (count.HasValue)
+        {
+            return Ok(sortedArticles.Take(count.Value).ToList());
+        }
 
-    [HttpGet("GetLatest")]
-    [AllowAnonymous]
-    public async Task<ActionResult> GetLastest([FromQuery] int count)
-    {
-        var articles = await Repo.GetAll();
-
-        var result = articles
-            .Take(count)
-            .OrderByDescending(a => a.PublishDate)
-            .Select(a => new ArticleDto 
-            {
-                Title = a.Title, 
-                Image = a.Image?.PhysicalFullPath, 
-                Content = a.Content, 
-                PublishDate = a.PublishDate
-            });
-
-        return Ok(result);
+        return Ok(sortedArticles);
     }
 
     [HttpGet("GetByTag")]
     [AllowAnonymous]
-    public async Task<ActionResult> GetByTag([FromQuery] string tag)
+    public async Task<ActionResult> GetByTag([FromQuery] string tag, [FromQuery] int? count = null)
     {
         var tagEntity = await TagRepo.GetOne(t => t.Name == tag);
         if (tagEntity == null)
@@ -78,16 +64,54 @@ public class ArticlesController : ApiController
         var articles = await Repo.GetAll(a =>
             articleTags.Select(at => at.ArticleId).ToList().Contains(a.Id));
 
-        var result = articles
+        var sortedArticles = articles
             .OrderByDescending(a => a.PublishDate)
             .Select(a => new ArticleDto
             {
                 Title = a.Title,
                 Image = a.Image?.PhysicalFullPath,
                 Content = a.Content,
-                PublishDate = a.PublishDate
+                PublishDate = a.PublishDate,
+                Slug = a.Slug
             });
+
+        if (count.HasValue)
+        {
+            return Ok(sortedArticles.Take(count.Value).ToList());
+        }
         
-        return Ok(result);
+        return Ok(sortedArticles);
+    }
+
+    [HttpGet("GetBySlug")]
+    [AllowAnonymous]
+    public async Task<ActionResult> GetBySlug([FromQuery] string slug)
+    {
+        var article = await Repo.GetOne(a => a.Slug == slug);
+
+        if (article is null)
+        {
+            return NotFound();
+        }
+
+        var articleTags = await ATRepo
+            .GetAll(at => at.ArticleId == article.Id);
+
+        var tagIds = articleTags.Select(at => at.TagId);
+        var tags = await TagRepo.GetAll(t => tagIds.Contains(t.Id));
+        var tagDtos = tags.Select(t => new TagDto
+        {
+            Name = t.Name
+        });
+
+        return Ok(new ArticleDto
+        {
+            Title = article.Title,
+            Image = article.Image?.PhysicalFullPath,
+            Content = article.Content,
+            PublishDate = article.PublishDate,
+            Slug = article.Slug,
+            Tags = tagDtos
+        });
     }
 }

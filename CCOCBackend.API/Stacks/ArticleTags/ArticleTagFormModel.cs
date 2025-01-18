@@ -6,7 +6,7 @@ using MCMS.Base.SwaggerFormly.Formly.Fields;
 namespace CCOCBackend.API.Stacks.ArticleTags;
 public class ArticleTagFormModel : IFormModel
 {
-    [FormlySelect(typeof(ArticlesAdminApiController), labelProp: "name", ShowReloadButton = true)]
+    [FormlySelect(typeof(ArticlesAdminApiController), labelProp: "title", ShowReloadButton = true)]
     public ArticleViewModel Article { get; set; }
 
     [FormlySelect(typeof(TagsAdminApiController), labelProp: "name", ShowReloadButton = true)]

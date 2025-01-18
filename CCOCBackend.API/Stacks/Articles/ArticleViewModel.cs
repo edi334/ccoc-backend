@@ -19,6 +19,10 @@ public class ArticleViewModel : ViewModel
     [JsonIgnore]
     public FileViewModel Image { get; set; }
     
+    [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)] 
+    [DetailsField]
+    public string Slug { get; set; }
+    
     [Display(Name = "Image")]
     [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
     [DetailsField]

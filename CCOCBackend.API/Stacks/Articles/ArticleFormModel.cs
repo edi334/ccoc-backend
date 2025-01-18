@@ -12,6 +12,8 @@ public class ArticleFormModel : IFormModel
 
     [FormlyFile(typeof(FilesAdminApiController), nameof(FilesAdminApiController.Upload), "unknown-purpose", "default")]
     public FileViewModel Image { get; set; }
+    
+    public string Slug { get; set; }
 
     [FormlyCkEditor]
     public string Content { get; set; }
