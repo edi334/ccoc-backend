@@ -37,8 +37,21 @@ var mApp = mAppBuilder.Build();
 
 mApp.ConfigureServices(builder.Services);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+        });
+});
+
 var app = builder.Build();
 
 mApp.Configure(app, app.Services);
+
+app.UseCors("AllowAll");
 
 app.Run();
