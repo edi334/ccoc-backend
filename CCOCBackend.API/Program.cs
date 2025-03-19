@@ -50,8 +50,8 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-mApp.Configure(app, app.Services);
-
 app.UseCors("AllowAll");
+
+mApp.Configure(app, app.Services);
 
 app.Run();

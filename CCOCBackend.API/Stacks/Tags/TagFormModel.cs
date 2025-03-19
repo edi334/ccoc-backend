@@ -8,6 +8,5 @@ public class TagFormModel : IFormModel
 {
     public string Name { get; set; }
 
-    [FormlyFile(typeof(FilesAdminApiController), nameof(FilesAdminApiController.Upload), "unknown-purpose", "default")]
-    public FileViewModel Icon { get; set; }
+    public string HexColor { get; set; }
 }

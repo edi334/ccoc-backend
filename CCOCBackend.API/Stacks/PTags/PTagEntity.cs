@@ -6,6 +6,8 @@ namespace CCOCBackend.API.Stacks.PTags;
 public class PTagEntity : Entity
 {
     public string Name { get; set; }
+    
+    public string HexColor { get; set; }
 
     public override string ToString()
     {

@@ -20,8 +20,7 @@ public class TagsController : ApiController
     {
         var tags = await Repo.GetAll();
 
-        var result = tags.Select(t => new TagDto {Name = t.Name});
+        var result = tags.Select(t => new TagDto {Name = t.Name, HexColor = t.HexColor});
         return Ok(result);
     }
-    
 }

@@ -13,16 +13,10 @@ public class TagViewModel : ViewModel
     [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
     [DetailsField]
     public string Name { get; set; }
-
-    [DetailsField(Hidden = true)]
-    [JsonIgnore]
-    public FileViewModel Icon { get; set; }
     
-    [Display(Name = "Icon")]
     [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
     [DetailsField]
-    public string IconDisplay => 
-        $"<img src='{(string.IsNullOrEmpty(Icon?.Url) ? "/img/device-placeholder.svg" : Icon.Url)}' alt=' ' class='thumb-image' />";
+    public string HexColor { get; set; }
 
     public override string ToString()
     {

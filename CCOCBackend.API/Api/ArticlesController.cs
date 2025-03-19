@@ -1,4 +1,5 @@
 using CCOCBackend.API.Api.Dtos;
+using CCOCBackend.API.Api.Utils;
 using CCOCBackend.API.Stacks.Articles;
 using CCOCBackend.API.Stacks.ArticleTags;
 using CCOCBackend.API.Stacks.Tags;
@@ -6,6 +7,8 @@ using MCMS.Auth.Controllers;
 using MCMS.Base.Attributes;
 using MCMS.Base.Data;
 using MCMS.Base.Extensions;
+using MCMS.Files;
+using MCMS.Files.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -32,17 +35,32 @@ public class ArticlesController : ApiController
     {
         var articles = await Repo.GetAll();
 
-        var sortedArticles = articles
-            .OrderByDescending(a => a.PublishDate)
-            .Select(a => new ArticleDto
-                {
-                    Title = a.Title,
-                    Image = a.Image?.PhysicalFullPath,
-                    Content = a.Content,
-                    PublishDate = a.PublishDate,
-                    Slug = a.Slug
-                }
-            );
+        var articleDtos = new List<ArticleDto>();
+
+        foreach (var article in articles)
+        {
+            var articleTags = await ATRepo
+                .GetAll(at => at.ArticleId == article.Id);
+            var tagIds = articleTags.Select(at => at.TagId);
+            var tags = await TagRepo.GetAll(t => tagIds.Contains(t.Id));
+            var tagDtos = tags.Select(t => new TagDto
+            {
+                Name = t.Name,
+                HexColor = t.HexColor
+            });
+            
+            articleDtos.Add(new ArticleDto
+            {
+                Title = article.Title,
+                Image = FileHelper.GetImagePath(article.Image),
+                Content = article.Content,
+                PublishDate = article.PublishDate,
+                Slug = article.Slug,
+                Tags = tagDtos
+            });
+        }
+
+        var sortedArticles = articleDtos.OrderByDescending(a => a.PublishDate);
 
         if (count.HasValue)
         {
@@ -69,7 +87,7 @@ public class ArticlesController : ApiController
             .Select(a => new ArticleDto
             {
                 Title = a.Title,
-                Image = a.Image?.PhysicalFullPath,
+                Image = FileHelper.GetImagePath(a.Image),
                 Content = a.Content,
                 PublishDate = a.PublishDate,
                 Slug = a.Slug
@@ -101,13 +119,14 @@ public class ArticlesController : ApiController
         var tags = await TagRepo.GetAll(t => tagIds.Contains(t.Id));
         var tagDtos = tags.Select(t => new TagDto
         {
-            Name = t.Name
+            Name = t.Name,
+            HexColor = t.HexColor
         });
 
         return Ok(new ArticleDto
         {
             Title = article.Title,
-            Image = article.Image?.PhysicalFullPath,
+            Image = FileHelper.GetImagePath(article.Image),
             Content = article.Content,
             PublishDate = article.PublishDate,
             Slug = article.Slug,

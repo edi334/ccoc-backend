@@ -16,9 +16,11 @@ public class PersonEntity : Entity
 
     public string Email { get; set; }
 
-    public string Information { get; set; }
+    public string Location { get; set; }
     
     public PersonType Type { get; set; }
+    
+    public string Description { get; set; }
     
     public override string ToString()
     {

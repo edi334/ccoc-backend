@@ -8,8 +8,8 @@ public class TagEntity : Entity
 {
     public string Name { get; set; }
 
-    public FileEntity Icon { get; set; }
-
+    public string HexColor { get; set; }
+    
     public override string ToString()
     {
         return Id;

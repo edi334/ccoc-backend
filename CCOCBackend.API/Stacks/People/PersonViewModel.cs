@@ -38,11 +38,15 @@ public class PersonViewModel : ViewModel
 
     [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
     [DetailsField]
-    public string Information { get; set; }
+    public string Location { get; set; }
     
     [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
     [DetailsField]
-    public PersonType PersonType { get; set; }
+    public PersonType Type { get; set; }
+    
+    [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
+    [DetailsField]
+    public string Description { get; set; }
     
     public override string ToString()
     {

@@ -3,6 +3,7 @@ using System;
 using CCOCBackend.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CCOCBackend.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250301124726_ChangedArticleTags")]
+    partial class ChangedArticleTags
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -174,9 +177,6 @@ namespace CCOCBackend.API.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("HexColor")
-                        .HasColumnType("text");
-
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
@@ -192,41 +192,6 @@ namespace CCOCBackend.API.Migrations
                     b.ToTable("PTags", (string)null);
                 });
 
-            modelBuilder.Entity("CCOCBackend.API.Stacks.Partners.PartnerEntity", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("ImageId")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Link")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<int>("PartnerType")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("Updated")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Created");
-
-                    b.HasIndex("ImageId");
-
-                    b.HasIndex("Updated");
-
-                    b.ToTable("Partners", (string)null);
-                });
-
             modelBuilder.Entity("CCOCBackend.API.Stacks.People.PersonEntity", b =>
                 {
                     b.Property<string>("Id")
@@ -235,9 +200,6 @@ namespace CCOCBackend.API.Migrations
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
 
                     b.Property<string>("Email")
                         .HasColumnType("text");
@@ -248,10 +210,10 @@ namespace CCOCBackend.API.Migrations
                     b.Property<string>("ImageId")
                         .HasColumnType("text");
 
-                    b.Property<string>("LastName")
+                    b.Property<string>("Information")
                         .HasColumnType("text");
 
-                    b.Property<string>("Location")
+                    b.Property<string>("LastName")
                         .HasColumnType("text");
 
                     b.Property<string>("PhoneNumber")
@@ -979,15 +941,6 @@ namespace CCOCBackend.API.Migrations
                         .HasForeignKey("ParentId");
 
                     b.Navigation("Parent");
-                });
-
-            modelBuilder.Entity("CCOCBackend.API.Stacks.Partners.PartnerEntity", b =>
-                {
-                    b.HasOne("MCMS.Files.Models.FileEntity", "Image")
-                        .WithMany()
-                        .HasForeignKey("ImageId");
-
-                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("CCOCBackend.API.Stacks.People.PersonEntity", b =>

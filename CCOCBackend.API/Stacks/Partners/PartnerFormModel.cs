@@ -4,16 +4,15 @@ using MCMS.Files.Attributes;
 using MCMS.Files.Controllers;
 using MCMS.Files.Models;
 
-namespace CCOCBackend.API.Stacks.Reports;
-public class ReportFormModel : IFormModel
+namespace CCOCBackend.API.Stacks.Partners;
+public class PartnerFormModel : IFormModel
 {
     public string Name { get; set; }
+    public PartnerType PartnerType { get; set; }
 
-    public string Year { get; set; }
-
-    public ReportType Type { get; set; }
-
-    [DisablePatchSubProperties]
     [FormlyFile(typeof(FilesAdminApiController), nameof(FilesAdminApiController.Upload), "unknown-purpose", "default")]
-    public FileViewModel File { get; set; }
+    [DisablePatchSubProperties]
+    public FileViewModel Image { get; set; }
+    
+    public string Link { get; set; }
 }
