@@ -23,6 +23,10 @@ public class CarouselPageViewModel : ViewModel
     [DetailsField]
     public string Description { get; set; }
     
+    [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
+    [DetailsField]
+    public string LinkTo { get; set; }
+    
     [DetailsField(Hidden = true)]
     [JsonIgnore]
     public FileViewModel Image { get; set; }

@@ -13,6 +13,8 @@ public class CarouselPageEntity : Entity
     public string Description { get; set; }
 
     public bool Enabled { get; set; }
+    
+    public string LinkTo { get; set; }
 
     public override string ToString()
     {

@@ -6,9 +6,9 @@ namespace CCOCBackend.API.Stacks.Reports;
 [Table("Reports")]
 public class ReportEntity : Entity
 {
-    public string Name { get; set; }
+    public string Description { get; set; }
 
-    public string Year { get; set; }
+    public int Year { get; set; }
 
     public ReportType Type { get; set; }
 

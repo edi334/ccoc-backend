@@ -16,4 +16,6 @@ public class CarouselPageFormModel : IFormModel
     public string Description { get; set; }
 
     public bool Enabled { get; set; }
+    
+    public string LinkTo { get; set; }
 }

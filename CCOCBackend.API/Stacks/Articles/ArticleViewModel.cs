@@ -14,14 +14,14 @@ public class ArticleViewModel : ViewModel
     [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
     [DetailsField]
     public string Title { get; set; }
-
-    [DetailsField(Hidden = true)]
-    [JsonIgnore]
-    public FileViewModel Image { get; set; }
     
     [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)] 
     [DetailsField]
     public string Slug { get; set; }
+
+    [DetailsField(Hidden = true)]
+    [JsonIgnore]
+    public FileViewModel Image { get; set; }
     
     [Display(Name = "Image")]
     [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]

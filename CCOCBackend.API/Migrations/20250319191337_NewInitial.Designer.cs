@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CCOCBackend.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250318195332_UpdatePTags")]
-    partial class UpdatePTags
+    [Migration("20250319191337_NewInitial")]
+    partial class NewInitial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -116,6 +116,9 @@ namespace CCOCBackend.API.Migrations
                     b.Property<string>("ImageId")
                         .HasColumnType("text");
 
+                    b.Property<string>("LinkTo")
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
@@ -207,6 +210,9 @@ namespace CCOCBackend.API.Migrations
                     b.Property<string>("ImageId")
                         .HasColumnType("text");
 
+                    b.Property<string>("Link")
+                        .HasColumnType("text");
+
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
@@ -235,6 +241,9 @@ namespace CCOCBackend.API.Migrations
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
 
                     b.Property<string>("Email")
                         .HasColumnType("text");
@@ -370,10 +379,10 @@ namespace CCOCBackend.API.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("FileId")
+                    b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("FileId")
                         .HasColumnType("text");
 
                     b.Property<int>("Type")
@@ -382,8 +391,8 @@ namespace CCOCBackend.API.Migrations
                     b.Property<DateTime>("Updated")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("Year")
-                        .HasColumnType("text");
+                    b.Property<int>("Year")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

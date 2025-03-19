@@ -1,6 +1,7 @@
 using CCOCBackend.API.Api.Dtos;
+using CCOCBackend.API.Api.Mappings;
 using CCOCBackend.API.Api.Utils;
-using CCOCBackend.API.Stacks.Shortcuts;
+using CCOCBackend.API.Stacks.Reports;
 using MCMS.Auth.Controllers;
 using MCMS.Base.Attributes;
 using MCMS.Base.Data;
@@ -13,29 +14,31 @@ using Microsoft.EntityFrameworkCore;
 namespace CCOCBackend.API.Api;
 
 [ApiRoute("[controller]")]
-public class ShortcutsController : ApiController
+public class ReportsController : ApiController
 {
-    private IRepository<ShortcutEntity> Repo => ServiceProvider.Repo<ShortcutEntity>();
+    private IRepository<ReportEntity> Repo => ServiceProvider.Repo<ReportEntity>();
     
     public override void OnActionExecuting(ActionExecutingContext context)
     {
         base.OnActionExecuting(context);
-        Repo.ChainQueryable(p => p.Include(a => a.Image));
+        Repo.ChainQueryable(q => q.Include(r => r.File));
     }
-
+    
     [HttpGet("GetAll")]
     [AllowAnonymous]
     public async Task<ActionResult> Get()
     {
-        var shortcuts = await Repo.GetAll(p => p.Enabled);
-        var result = shortcuts
-            .Select(p => new ShortcutDto
-            {
-                Name = p.Name,
-                Link = p.Link,
-                Image = FileHelper.GetImagePath(p.Image),
-            });
+        var reports = await Repo.GetAll();
 
+        var result = reports.Select(r => new ReportDto
+            {
+                Description = r.Description,
+                Year = r.Year,
+                Type = EnumMapper.REPORT_TYPE[r.Type],
+                File = FileHelper.GetImagePath(r.File)
+            }
+        );
+        
         return Ok(result);
     }
 }

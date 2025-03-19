@@ -1,5 +1,6 @@
 using CCOCBackend.API.Stacks.Partners;
 using CCOCBackend.API.Stacks.People;
+using CCOCBackend.API.Stacks.Reports;
 
 namespace CCOCBackend.API.Api.Mappings;
 
@@ -15,5 +16,11 @@ public static class EnumMapper
     {
         {PersonType.PersonalAngajat, "angajat"},
         {PersonType.SefOficiu, "sef-oficiu"}
+    };
+    
+    public static Dictionary<ReportType, string> REPORT_TYPE = new()
+    {
+        {ReportType.Plan, "plan"},
+        {ReportType.Raport, "raport"}
     };
 }

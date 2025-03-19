@@ -5,5 +5,6 @@ public enum ReportType
 {
     [EnumMember(Value = "0")]
     Plan,
-    Report,
+    [EnumMember(Value = "1")]
+    Raport,
 }

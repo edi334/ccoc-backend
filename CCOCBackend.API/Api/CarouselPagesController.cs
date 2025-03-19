@@ -1,4 +1,5 @@
 using CCOCBackend.API.Api.Dtos;
+using CCOCBackend.API.Api.Utils;
 using CCOCBackend.API.Stacks.CarouselPages;
 using MCMS.Auth.Controllers;
 using MCMS.Base.Attributes;
@@ -32,7 +33,8 @@ public class CarouselPagesController : ApiController
             {
                 Name = p.Name,
                 Description = p.Description,
-                Image = p.Image?.PhysicalFullPath,
+                Image = FileHelper.GetImagePath(p.Image),
+                LinkTo = p.LinkTo
             });
 
         return Ok(result);
