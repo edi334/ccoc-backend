@@ -1,12 +1,10 @@
 using CCOCBackend.API.Api.Dtos;
-using CCOCBackend.API.Api.Mappings;
 using CCOCBackend.API.Api.Utils;
-using CCOCBackend.API.Stacks.Partners;
+using CCOCBackend.API.Stacks.Services;
 using MCMS.Auth.Controllers;
 using MCMS.Base.Attributes;
 using MCMS.Base.Data;
 using MCMS.Base.Extensions;
-using MCMS.Files.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -15,39 +13,39 @@ using Microsoft.EntityFrameworkCore;
 namespace CCOCBackend.API.Api;
 
 [ApiRoute("[controller]")]
-public class PartnersController : ApiController
+public class ServicesController : ApiController
 {
-    private IRepository<PartnerEntity> Repo => ServiceProvider.Repo<PartnerEntity>();
+    private IRepository<ServiceEntity> Repo => ServiceProvider.Repo<ServiceEntity>();
     
     public override void OnActionExecuting(ActionExecutingContext context)
     {
         base.OnActionExecuting(context);
-        Repo.ChainQueryable(q => q.Include(a => a.Image));
+        Repo.ChainQueryable(q => q.Include(s => s.Image));
     }
-
+    
     [HttpGet("GetAll")]
     [AllowAnonymous]
     public async Task<ActionResult> Get()
     {
-        var partners = await Repo.GetAll();
+        var services = await Repo.GetAll();
 
-        var partnerDtos = partners.Select(p =>
+        var result = services.Select(s =>
         {
-            var dto =  new PartnerDto
+            var dto = new ServiceDto
             {
-                Name = p.Name,
-                Image = FileHelper.GetImagePath(p.Image),
-                PartnerType = EnumMapper.PARTNER_TYPE[p.PartnerType],
+                Name = s.Name,
+                Description = s.Description,
+                Image = FileHelper.GetImagePath(s.Image)
             };
 
-            if (p.Link is not null)
+            if (s.FormLink is not null)
             {
-                dto.Link = p.Link;
+                dto.FormLink = s.FormLink;
             }
 
             return dto;
         });
-
-        return Ok(partnerDtos);
+        
+        return Ok(result);
     }
 }

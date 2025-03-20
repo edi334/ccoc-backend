@@ -28,9 +28,14 @@ public class PartnerViewModel : ViewModel
     public string ImageDisplay => 
         $"<img src='{(string.IsNullOrEmpty(Image?.Url) ? "/img/device-placeholder.svg" : Image.Url)}' alt=' ' class='thumb-image' />";
 
+    [DetailsField(Hidden = true)]
+    [JsonIgnore]
+    public string Link { get; set; }
+
+    [Display(Name = "Link")]
     [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
     [DetailsField]
-    public string Link { get; set; }
+    public string LinkDisplay => Link ?? "fără link";
     
     public override string ToString()
     {
