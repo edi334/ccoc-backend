@@ -14,6 +14,9 @@ using CCOCBackend.API.Stacks.Services;
 using CCOCBackend.API.Stacks.Settings;
 using CCOCBackend.API.Stacks.Shortcuts;
 using CCOCBackend.API.Stacks.Tags;
+using CCOCBackend.Api.Stacks.VolunteeringBenefits;
+using CCOCBackend.API.Stacks.VolunteeringCarouselPages;
+using CCOCBackend.API.Stacks.Volunteerings;
 using MCMS.Admin.Users;
 using MCMS.Base.Builder;
 using MCMS.Display.Link;
@@ -99,6 +102,18 @@ public class CCOCBackendSpecifications : MSpecifications
                 new MenuLink("Rapoarte", typeof(ReportsUiController)).WithIconClasses("fas fa-chart-line")
             }
         }.RequiresRoles("Admin"));
+        config.Add(new MenuSection
+        {
+            Name = "Voluntariat",
+            Id = "Volunteering",
+            IsCollapsable = true,
+            Items =
+            {
+                new MenuLink("Voluntariat", typeof(VolunteeringsUiController)).WithIconClasses("fas fa-handshake"),
+                new MenuLink("Carusel", typeof(VolunteeringCarouselPagesUiController)).WithIconClasses("fas fa-water"),
+                new MenuLink("Beneficii", typeof(VolunteeringBenefitsUiController)).WithIconClasses("fas fa-arrow-up")
+            }
+        });
         config.Add(new MenuSection
         {
             Name = "Alt conținut",

@@ -26,7 +26,8 @@ public class PageController : ApiController
         {
             Name = p.Name,
             Description = p.Description,
-            Slug = p.Slug
+            Slug = p.Slug,
+            ShortDescription = p.ShortDescription
         });
         
         return Ok(result);
@@ -47,7 +48,8 @@ public class PageController : ApiController
         {
             Name = page.Name,
             Description = page.Description,
-            Slug = page.Slug
+            Slug = page.Slug,
+            ShortDescription = page.ShortDescription
         });
     }
 }
