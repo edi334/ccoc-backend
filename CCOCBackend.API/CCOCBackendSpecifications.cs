@@ -1,3 +1,4 @@
+using CCOCBackend.API.Pages;
 using CCOCBackend.API.Stacks.Articles;
 using CCOCBackend.API.Stacks.ArticleTags;
 using CCOCBackend.API.Stacks.CarouselPages;
@@ -108,7 +109,8 @@ public class CCOCBackendSpecifications : MSpecifications
                 new MenuLink("Carusel", typeof(CarouselPagesUiController)).WithIconClasses("fas fa-water"),
                 new MenuLink("Servicii", typeof(ServicesUiController)).WithIconClasses("fas fa-handshake"),
                 new MenuLink("Parteneri", typeof(PartnersUiController)).WithIconClasses("fas fa-handshake"),
-                new MenuLink("Shortcuts", typeof(ShortcutsUiController)).WithIconClasses("fas fa-link")
+                new MenuLink("Shortcuts", typeof(ShortcutsUiController)).WithIconClasses("fas fa-link"),
+                new MenuLink("Pagini", typeof(PagesUiController)).WithIconClasses("fas fa-file")
             }
         }.RequiresRoles("Admin"));
     }
