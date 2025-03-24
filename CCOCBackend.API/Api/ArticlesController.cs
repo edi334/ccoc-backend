@@ -101,6 +101,47 @@ public class ArticlesController : ApiController
         return Ok(sortedArticles);
     }
 
+    [HttpGet("GetByString")]
+    [AllowAnonymous]
+    public async Task<ActionResult> GetByString([FromQuery] string searchString)
+    {
+        var articles = await Repo.GetAll(a =>
+            a.Title.ToLower().Contains(searchString.ToLower()) || a.Content.ToLower().Contains(searchString.ToLower()));
+
+        if (articles.Count == 0)
+        {
+            return NotFound();
+        }
+        
+        var articleDtos = new List<ArticleDto>();
+        
+        foreach (var article in articles)
+        {
+            var articleTags = await ATRepo
+                .GetAll(at => at.ArticleId == article.Id);
+            var tagIds = articleTags.Select(at => at.TagId);
+            var tags = await TagRepo.GetAll(t => tagIds.Contains(t.Id));
+            var tagDtos = tags.Select(t => new TagDto
+            {
+                Name = t.Name,
+                HexColor = t.HexColor
+            });
+            
+            articleDtos.Add(new ArticleDto
+            {
+                Title = article.Title,
+                Image = FileHelper.GetImagePath(article.Image),
+                Content = article.Content,
+                PublishDate = article.PublishDate,
+                Slug = article.Slug,
+                Tags = tagDtos
+            });
+        }
+        
+        var sortedArticles = articleDtos.OrderByDescending(a => a.PublishDate);
+        return Ok(sortedArticles);
+    }
+
     [HttpGet("GetBySlug")]
     [AllowAnonymous]
     public async Task<ActionResult> GetBySlug([FromQuery] string slug)
