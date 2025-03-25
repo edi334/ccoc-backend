@@ -3,7 +3,9 @@ using CCOCBackend.API.Stacks.Articles;
 using CCOCBackend.API.Stacks.ArticleTags;
 using CCOCBackend.API.Stacks.CarouselPages;
 using CCOCBackend.API.Stacks.MenuItems;
+using CCOCBackend.API.Stacks.PageImages;
 using CCOCBackend.API.Stacks.Partners;
+using CCOCBackend.API.Stacks.PartnerTypes;
 using CCOCBackend.API.Stacks.People;
 using CCOCBackend.API.Stacks.PersonTags;
 using CCOCBackend.API.Stacks.ProjectEditions;
@@ -104,6 +106,28 @@ public class CCOCBackendSpecifications : MSpecifications
         }.RequiresRoles("Admin"));
         config.Add(new MenuSection
         {
+            Name = "Parteneri",
+            Id = "Partners",
+            IsCollapsable = true,
+            Items =
+            {
+                new MenuLink("Parteneri", typeof(PartnersUiController)).WithIconClasses("fas fa-handshake"),
+                new MenuLink("Tipuri de Parteneri", typeof(PartnerTypesUiController)).WithIconClasses("fas fa-file")
+            }
+        });
+        config.Add(new MenuSection
+        {
+            Name = "Pagini",
+            Id = "Pages",
+            IsCollapsable = true,
+            Items =
+            {
+                new MenuLink("Pagini", typeof(PagesUiController)).WithIconClasses("fas fa-file"),
+                new MenuLink("Imagini", typeof(PageImagesUiController)).WithIconClasses("fas fa-file")
+            }
+        });
+        config.Add(new MenuSection
+        {
             Name = "Voluntariat",
             Id = "Volunteering",
             IsCollapsable = true,
@@ -123,9 +147,7 @@ public class CCOCBackendSpecifications : MSpecifications
             {
                 new MenuLink("Carusel", typeof(CarouselPagesUiController)).WithIconClasses("fas fa-water"),
                 new MenuLink("Servicii", typeof(ServicesUiController)).WithIconClasses("fas fa-handshake"),
-                new MenuLink("Parteneri", typeof(PartnersUiController)).WithIconClasses("fas fa-handshake"),
                 new MenuLink("Shortcuts", typeof(ShortcutsUiController)).WithIconClasses("fas fa-link"),
-                new MenuLink("Pagini", typeof(PagesUiController)).WithIconClasses("fas fa-file")
             }
         }.RequiresRoles("Admin"));
     }

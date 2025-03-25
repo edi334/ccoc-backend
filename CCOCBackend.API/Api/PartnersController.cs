@@ -1,12 +1,10 @@
 using CCOCBackend.API.Api.Dtos;
-using CCOCBackend.API.Api.Mappings;
 using CCOCBackend.API.Api.Utils;
 using CCOCBackend.API.Stacks.Partners;
 using MCMS.Auth.Controllers;
 using MCMS.Base.Attributes;
 using MCMS.Base.Data;
 using MCMS.Base.Extensions;
-using MCMS.Files.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -18,11 +16,12 @@ namespace CCOCBackend.API.Api;
 public class PartnersController : ApiController
 {
     private IRepository<PartnerEntity> Repo => ServiceProvider.Repo<PartnerEntity>();
-    
+
     public override void OnActionExecuting(ActionExecutingContext context)
     {
         base.OnActionExecuting(context);
-        Repo.ChainQueryable(q => q.Include(a => a.Image));
+        Repo.ChainQueryable(q => 
+            q.Include(a => a.Image).Include(a => a.Type));
     }
 
     [HttpGet("GetAll")]
@@ -37,7 +36,7 @@ public class PartnersController : ApiController
             {
                 Name = p.Name,
                 Image = FileHelper.GetImagePath(p.Image),
-                PartnerType = EnumMapper.PARTNER_TYPE[p.PartnerType],
+                PartnerType = p.Type.Name
             };
 
             if (p.Link is not null)

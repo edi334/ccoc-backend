@@ -3,17 +3,22 @@ using MCMS.Base.Data.ViewModels;
 using MCMS.Files.Models;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
-using CCOCBackend.API.Stacks.PartnerTypes;
+using CCOCBackend.API.Pages;
 using MCMS.Base.Display.ModelDisplay;
 using MCMS.Base.Display.ModelDisplay.Attributes;
 
-namespace CCOCBackend.API.Stacks.Partners;
-[Display(Name = "Partner")]
-public class PartnerViewModel : ViewModel
+namespace CCOCBackend.API.Stacks.PageImages;
+[Display(Name = "PageImage")]
+public class PageImageViewModel : ViewModel
 {
+    [DetailsField(Hidden = true)]
+    [JsonIgnore]
+    public PageViewModel Page { get; set; }
+    
+    [Display(Name = "Page")]
     [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
     [DetailsField]
-    public string Name { get; set; }
+    public string PageDisplay => Page.Name;
     
     [DetailsField(Hidden = true)]
     [JsonIgnore]
@@ -24,24 +29,6 @@ public class PartnerViewModel : ViewModel
     [DetailsField]
     public string ImageDisplay => 
         $"<img src='{(string.IsNullOrEmpty(Image?.Url) ? "/img/device-placeholder.svg" : Image.Url)}' alt=' ' class='thumb-image' />";
-
-    [DetailsField(Hidden = true)]
-    [JsonIgnore]
-    public PartnerTypeViewModel Type { get; set; }
-
-    [Display(Name = "Type")]
-    [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
-    [DetailsField]
-    public string TypeDisplay => Type.Name;
-    
-    [DetailsField(Hidden = true)]
-    [JsonIgnore]
-    public string Link { get; set; }
-
-    [Display(Name = "Link")]
-    [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
-    [DetailsField]
-    public string LinkDisplay => Link ?? "fără link";
     
     public override string ToString()
     {

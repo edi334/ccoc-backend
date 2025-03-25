@@ -3,6 +3,7 @@ using System;
 using CCOCBackend.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CCOCBackend.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250325204414_ChangeSomeEntities")]
+    partial class ChangeSomeEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,6 +24,35 @@ namespace CCOCBackend.API.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("CCOCBacked.API.Stacks.PartnerTypes.PartnerTypeEntity", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PartnerId")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("Updated")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Created");
+
+                    b.HasIndex("PartnerId");
+
+                    b.HasIndex("Updated");
+
+                    b.ToTable("PartnerTypes", (string)null);
+                });
 
             modelBuilder.Entity("CCOCBackend.API.Pages.PageEntity", b =>
                 {
@@ -259,30 +291,6 @@ namespace CCOCBackend.API.Migrations
                     b.ToTable("PageImages", (string)null);
                 });
 
-            modelBuilder.Entity("CCOCBackend.API.Stacks.PartnerTypes.PartnerTypeEntity", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Updated")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Created");
-
-                    b.HasIndex("Updated");
-
-                    b.ToTable("PartnerTypes", (string)null);
-                });
-
             modelBuilder.Entity("CCOCBackend.API.Stacks.Partners.PartnerEntity", b =>
                 {
                     b.Property<string>("Id")
@@ -301,9 +309,6 @@ namespace CCOCBackend.API.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<string>("TypeId")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("Updated")
                         .HasColumnType("timestamp without time zone");
 
@@ -312,8 +317,6 @@ namespace CCOCBackend.API.Migrations
                     b.HasIndex("Created");
 
                     b.HasIndex("ImageId");
-
-                    b.HasIndex("TypeId");
 
                     b.HasIndex("Updated");
 
@@ -1157,6 +1160,15 @@ namespace CCOCBackend.API.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("CCOCBacked.API.Stacks.PartnerTypes.PartnerTypeEntity", b =>
+                {
+                    b.HasOne("CCOCBackend.API.Stacks.Partners.PartnerEntity", "Partner")
+                        .WithMany()
+                        .HasForeignKey("PartnerId");
+
+                    b.Navigation("Partner");
+                });
+
             modelBuilder.Entity("CCOCBackend.API.Stacks.ArticleTags.ArticleTagEntity", b =>
                 {
                     b.HasOne("CCOCBackend.API.Stacks.Articles.ArticleEntity", "Article")
@@ -1220,13 +1232,7 @@ namespace CCOCBackend.API.Migrations
                         .WithMany()
                         .HasForeignKey("ImageId");
 
-                    b.HasOne("CCOCBackend.API.Stacks.PartnerTypes.PartnerTypeEntity", "Type")
-                        .WithMany()
-                        .HasForeignKey("TypeId");
-
                     b.Navigation("Image");
-
-                    b.Navigation("Type");
                 });
 
             modelBuilder.Entity("CCOCBackend.API.Stacks.People.PersonEntity", b =>
