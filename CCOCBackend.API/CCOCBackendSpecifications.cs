@@ -114,7 +114,7 @@ public class CCOCBackendSpecifications : MSpecifications
                 new MenuLink("Parteneri", typeof(PartnersUiController)).WithIconClasses("fas fa-handshake"),
                 new MenuLink("Tipuri de Parteneri", typeof(PartnerTypesUiController)).WithIconClasses("fas fa-file")
             }
-        });
+        }.RequiresRoles("Admin"));
         config.Add(new MenuSection
         {
             Name = "Pagini",
@@ -125,7 +125,7 @@ public class CCOCBackendSpecifications : MSpecifications
                 new MenuLink("Pagini", typeof(PagesUiController)).WithIconClasses("fas fa-file"),
                 new MenuLink("Imagini", typeof(PageImagesUiController)).WithIconClasses("fas fa-file")
             }
-        });
+        }.RequiresRoles("Admin"));
         config.Add(new MenuSection
         {
             Name = "Voluntariat",
@@ -137,7 +137,7 @@ public class CCOCBackendSpecifications : MSpecifications
                 new MenuLink("Carusel", typeof(VolunteeringCarouselPagesUiController)).WithIconClasses("fas fa-water"),
                 new MenuLink("Beneficii", typeof(VolunteeringBenefitsUiController)).WithIconClasses("fas fa-arrow-up")
             }
-        });
+        }.RequiresRoles("Admin"));
         config.Add(new MenuSection
         {
             Name = "Alt conținut",
