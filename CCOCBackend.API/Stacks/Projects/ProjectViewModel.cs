@@ -25,6 +25,19 @@ public class ProjectViewModel : ViewModel
     [DetailsField]
     public string Slug { get; set; }
     
+    [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
+    [DetailsField]
+    public bool IsParent { get; set; }
+    
+    [DetailsField(Hidden = true)]
+    [JsonIgnore]
+    public ProjectViewModel Parent { get; set; }
+
+    [Display(Name = "Parent")]
+    [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
+    [DetailsField]
+    public string ParentDisplay => Parent?.Title ?? "No parent";
+    
     [DetailsField(Hidden = true)]
     [JsonIgnore]
     public FileViewModel TitleImage { get; set; }
@@ -33,7 +46,7 @@ public class ProjectViewModel : ViewModel
     [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
     [DetailsField]
     public string TitleImageDisplay => 
-        $"<img src='{(string.IsNullOrEmpty(TitleImage?.Url) ? "/img/device-placeholder.svg" : TitleImage.Url)}' alt=' ' class='thumb-image' />";
+        $"<img style='max-height: 150px' src='{(string.IsNullOrEmpty(TitleImage?.Url) ? "/img/device-placeholder.svg" : TitleImage.Url)}' alt=' ' class='thumb-image' />";
     
     [DetailsField(Hidden = true)]
     [JsonIgnore]
@@ -43,7 +56,7 @@ public class ProjectViewModel : ViewModel
     [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
     [DetailsField]
     public string PresentationImageDisplay => 
-        $"<img src='{(string.IsNullOrEmpty(PresentationImage?.Url) ? "/img/device-placeholder.svg" : PresentationImage.Url)}' alt=' ' class='thumb-image' />";
+        $"<img style='max-height: 150px' src='{(string.IsNullOrEmpty(PresentationImage?.Url) ? "/img/device-placeholder.svg" : PresentationImage.Url)}' alt=' ' class='thumb-image' />";
 
     public override string ToString()
     {

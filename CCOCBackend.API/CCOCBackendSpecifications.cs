@@ -2,13 +2,11 @@ using CCOCBackend.API.Pages;
 using CCOCBackend.API.Stacks.Articles;
 using CCOCBackend.API.Stacks.ArticleTags;
 using CCOCBackend.API.Stacks.CarouselPages;
-using CCOCBackend.API.Stacks.MenuItems;
 using CCOCBackend.API.Stacks.PageImages;
 using CCOCBackend.API.Stacks.Partners;
 using CCOCBackend.API.Stacks.PartnerTypes;
 using CCOCBackend.API.Stacks.People;
 using CCOCBackend.API.Stacks.PersonTags;
-using CCOCBackend.API.Stacks.ProjectEditions;
 using CCOCBackend.API.Stacks.Projects;
 using CCOCBackend.API.Stacks.PTags;
 using CCOCBackend.API.Stacks.Reports;
@@ -56,7 +54,6 @@ public class CCOCBackendSpecifications : MSpecifications
             {
                 new MenuLink("Utilizatori", typeof(AdminUsersUiController)).WithIconClasses("fas fa-users"),
                 new MenuLink("Setări", typeof(SettingsUiController)).WithIconClasses("fas fa-gear"),
-                new MenuLink("Meniu", typeof(MenuItemsUiController)).WithIconClasses("fas fa-bars")
             }
         }.RequiresRoles("Admin"));
         config.Add(new MenuSection
@@ -67,7 +64,6 @@ public class CCOCBackendSpecifications : MSpecifications
             Items =
             {
                 new MenuLink("Proiecte", typeof(ProjectsUiController)).WithIconClasses("fas fa-diagram-project"),
-                new MenuLink("Ediții", typeof(ProjectEditionsUiController)).WithIconClasses("fas fa-table")
             }
         }.RequiresRoles("Admin"));
         config.Add(new MenuSection

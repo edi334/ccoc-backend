@@ -14,5 +14,6 @@ public class ProjectsUiController : GenericModalAdminUiController<ProjectEntity,
         base.OnActionExecuting(context);
         Repo.ChainQueryable(q => q.Include(c => c.TitleImage));
         Repo.ChainQueryable(q => q.Include(c => c.PresentationImage));
+        Repo.ChainQueryable(q => q.Include(c => c.Parent));
     }
 }

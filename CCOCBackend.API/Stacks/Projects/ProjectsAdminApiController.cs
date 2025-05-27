@@ -15,6 +15,7 @@ public class ProjectsAdminApiController : CrudAdminApiController<ProjectEntity, 
         base.OnActionExecuting(context);
         Repo.ChainQueryable(q => q.Include(c => c.TitleImage));
         Repo.ChainQueryable(q => q.Include(c => c.PresentationImage));
+        Repo.ChainQueryable(q => q.Include(c => c.Parent));
     }
     
     protected override Task OnCreating(ProjectEntity e)
@@ -23,6 +24,8 @@ public class ProjectsAdminApiController : CrudAdminApiController<ProjectEntity, 
             e.TitleImage = ServiceProvider.GetRepo<FileEntity>().Attach(e.TitleImage);
         if (e.PresentationImage != null)
             e.PresentationImage = ServiceProvider.GetRepo<FileEntity>().Attach(e.PresentationImage);
+        if (e.Parent != null)
+            e.Parent = ServiceProvider.GetRepo<ProjectEntity>().Attach(e.Parent);
 
         return Task.CompletedTask;
     }

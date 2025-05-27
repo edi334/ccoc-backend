@@ -24,4 +24,10 @@ public class ProjectFormModel : IFormModel
     [DisablePatchSubProperties]
     [FormlyFile(typeof(FilesAdminApiController), nameof(FilesAdminApiController.Upload), "unknown-purpose", "default")]
     public FileViewModel PresentationImage { get; set; }
+    
+    public bool IsParent { get; set; }
+    
+    [DisablePatchSubProperties]
+    [FormlySelect(typeof(ProjectsAdminApiController), labelProp: "title", ShowReloadButton = true)]
+    public ProjectViewModel Parent { get; set; }
 }

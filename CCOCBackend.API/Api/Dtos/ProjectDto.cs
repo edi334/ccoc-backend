@@ -13,4 +13,8 @@ public class ProjectDto
     public string TitleImage { get; set; }
     
     public string PresentationImage { get; set; }
+    
+    public bool IsParent { get; set; }
+    
+    public ProjectDto Parent { get; set; }
 }

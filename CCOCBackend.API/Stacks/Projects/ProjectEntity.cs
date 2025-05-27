@@ -17,6 +17,10 @@ public class ProjectEntity : Entity
     public FileEntity TitleImage { get; set; }
     
     public FileEntity PresentationImage { get; set; }
+    
+    public bool IsParent { get; set; }
+    
+    public ProjectEntity Parent { get; set; }
 
     public override string ToString()
     {

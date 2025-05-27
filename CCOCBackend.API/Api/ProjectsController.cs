@@ -23,23 +23,54 @@ public class ProjectsController : ApiController
         base.OnActionExecuting(context);
         Repo.ChainQueryable(q => q.Include(p => p.TitleImage));
         Repo.ChainQueryable(q => q.Include(p => p.PresentationImage));
+        Repo.ChainQueryable(q => q.Include(p => p.Parent));
     }
     
     [HttpGet("GetAll")]
     [AllowAnonymous]
-    public async Task<ActionResult> Get()
+    public async Task<ActionResult> Get([FromQuery] string? type = null)
     {
         var projects = await Repo.GetAll();
+        
+        var projectDtos = projects.Select(p => _getProjectWithParents(p));
 
-        var result = projects.Select(p => new ProjectDto
+        if (type is not null)
         {
-            Title = p.Title,
-            Description = p.Description,
-            Type = EnumMapper.PROJECT_TYPE[p.Type],
-            Slug = p.Slug,
-            TitleImage = FileHelper.GetImagePath(p.TitleImage),
-            PresentationImage = FileHelper.GetImagePath(p.PresentationImage)
-        });
+            var result = projectDtos.Where(p => p.Type == type);
+            return Ok(result);
+        }
+        
+        return Ok(projectDtos);
+    }
+    
+    [HttpGet("GetAllParents")]
+    [AllowAnonymous]
+    public async Task<ActionResult> GetParents([FromQuery] string? type = null)
+    {
+        var projects = await Repo.GetAll();
+        
+        var projectDtos = projects
+            .Where(p => p.IsParent)
+            .Select(p => _getProjectWithParents(p));
+
+        if (type is not null)
+        {
+            var result = projectDtos.Where(p => p.Type == type);
+            return Ok(result);
+        }
+        
+        return Ok(projectDtos);
+    }
+    
+    [HttpGet("GetChildren")]
+    [AllowAnonymous]
+    public async Task<ActionResult> GetChildren([FromQuery] string parentSlug)
+    {
+        var projects = await Repo.GetAll(p => p.Parent.Slug == parentSlug);
+        
+        var result = projects
+            .Where(p => !p.IsParent)
+            .Select(p => _getProjectWithParents(p));
 
         return Ok(result);
     }
@@ -55,14 +86,27 @@ public class ProjectsController : ApiController
             return NotFound();
         }
 
-        return Ok(new ProjectDto
+        return Ok(_getProjectWithParents(project));
+    }
+
+    private ProjectDto _getProjectWithParents(ProjectEntity project)
+    {
+        var projectDto = new ProjectDto
         {
             Title = project.Title,
             Description = project.Description,
             Type = EnumMapper.PROJECT_TYPE[project.Type],
             Slug = project.Slug,
+            IsParent = project.IsParent,
             TitleImage = FileHelper.GetImagePath(project.TitleImage),
             PresentationImage = FileHelper.GetImagePath(project.PresentationImage)
-        });
+        };
+
+        if (project.Parent is not null)
+        {
+            projectDto.Parent = _getProjectWithParents(project.Parent);
+        }
+
+        return projectDto;
     }
 }
