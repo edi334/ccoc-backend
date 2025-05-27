@@ -14,9 +14,9 @@
     </ItemGroup>
 
     <ItemGroup Condition="$(ENV_TYPE) == 'CI_BUILD'">
-        <PackageReference Include="MCMS.Auth" Version="0.8.6" />
-        <PackageReference Include="MCMS.Common" Version="0.8.6" />
-        <PackageReference Include="MCMS.Files" Version="0.8.6" />
+        <PackageReference Include="MCMS.Auth" Version="0.8.8" />
+        <PackageReference Include="MCMS.Common" Version="0.8.8" />
+        <PackageReference Include="MCMS.Files" Version="0.8.8" />
     </ItemGroup>
 
     <ItemGroup>
