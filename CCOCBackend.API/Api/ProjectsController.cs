@@ -108,7 +108,8 @@ public class ProjectsController : ApiController
             Slug = project.Slug,
             IsParent = project.IsParent,
             TitleImage = FileHelper.GetImagePath(project.TitleImage),
-            PresentationImage = FileHelper.GetImagePath(project.PresentationImage)
+            PresentationImage = FileHelper.GetImagePath(project.PresentationImage),
+            ExternalUrl = project.ExternalUrl
         };
 
         if (project.Parent is not null)

@@ -16,5 +16,7 @@ public class ProjectDto
     
     public bool IsParent { get; set; }
     
+    public string ExternalUrl { get; set; }
+    
     public ProjectDto Parent { get; set; }
 }
