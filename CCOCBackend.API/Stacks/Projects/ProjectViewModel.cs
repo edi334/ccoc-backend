@@ -11,6 +11,10 @@ public class ProjectViewModel : ViewModel
 {
     [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
     [DetailsField]
+    public bool Enabled { get; set; }
+    
+    [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
+    [DetailsField]
     public string Title { get; set; }
 
     [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
@@ -37,6 +41,10 @@ public class ProjectViewModel : ViewModel
     [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
     [DetailsField]
     public string ParentDisplay => Parent?.Title ?? "No parent";
+    
+    [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
+    [DetailsField]
+    public string ExternalUrl { get; set; }
     
     [DetailsField(Hidden = true)]
     [JsonIgnore]

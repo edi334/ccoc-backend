@@ -32,7 +32,9 @@ public class ProjectsController : ApiController
     {
         var projects = await Repo.GetAll();
         
-        var projectDtos = projects.Select(p => _getProjectWithParents(p));
+        var projectDtos = projects
+            .Where(p => p.Enabled)
+            .Select(p => _getProjectWithParents(p));
 
         if (type is not null)
         {
@@ -50,6 +52,7 @@ public class ProjectsController : ApiController
         var projects = await Repo.GetAll();
         
         var projectDtos = projects
+            .Where(p => p.Enabled)
             .Where(p => p.IsParent)
             .Select(p => _getProjectWithParents(p));
 
@@ -69,6 +72,7 @@ public class ProjectsController : ApiController
         var projects = await Repo.GetAll(p => p.Parent.Slug == parentSlug);
         
         var result = projects
+            .Where(p => p.Enabled)
             .Where(p => !p.IsParent)
             .Select(p => _getProjectWithParents(p));
 
@@ -84,6 +88,11 @@ public class ProjectsController : ApiController
         if (project is null)
         {
             return NotFound();
+        }
+        
+        if (!project.Enabled)
+        {
+            return BadRequest("Project is not enabled!");
         }
 
         return Ok(_getProjectWithParents(project));

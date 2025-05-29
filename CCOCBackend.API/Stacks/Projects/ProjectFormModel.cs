@@ -8,6 +8,8 @@ using MCMS.Files.Models;
 namespace CCOCBackend.API.Stacks.Projects;
 public class ProjectFormModel : IFormModel
 {
+    public bool Enabled { get; set; }
+    
     public string Title { get; set; }
 
     [FormlyCkEditor]
@@ -26,6 +28,8 @@ public class ProjectFormModel : IFormModel
     public FileViewModel PresentationImage { get; set; }
     
     public bool IsParent { get; set; }
+    
+    public string ExternalUrl { get; set; }
     
     [DisablePatchSubProperties]
     [FormlySelect(typeof(ProjectsAdminApiController), labelProp: "title", ShowReloadButton = true)]

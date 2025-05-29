@@ -6,6 +6,8 @@ namespace CCOCBackend.API.Stacks.Projects;
 [Table("Projects")]
 public class ProjectEntity : Entity
 {
+    public bool Enabled { get; set; }
+    
     public string Title { get; set; }
 
     public string Description { get; set; }
@@ -21,6 +23,8 @@ public class ProjectEntity : Entity
     public bool IsParent { get; set; }
     
     public ProjectEntity Parent { get; set; }
+    
+    public string ExternalUrl { get; set; }
 
     public override string ToString()
     {
