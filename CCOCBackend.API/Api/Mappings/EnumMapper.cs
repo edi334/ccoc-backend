@@ -1,7 +1,6 @@
-using CCOCBackend.API.Stacks.Partners;
 using CCOCBackend.API.Stacks.People;
 using CCOCBackend.API.Stacks.Projects;
-using CCOCBackend.API.Stacks.Reports;
+using CCOCBackend.API.Stacks.Resources;
 
 namespace CCOCBackend.API.Api.Mappings;
 
@@ -13,10 +12,11 @@ public static class EnumMapper
         {PersonType.SefOficiu, "sef-oficiu"}
     };
     
-    public static Dictionary<ReportType, string> REPORT_TYPE = new()
+    public static Dictionary<ResourceType, string> RESOURCE_TYPE = new()
     {
-        {ReportType.Plan, "plan"},
-        {ReportType.Raport, "raport"}
+        {ResourceType.Plan, "plan"},
+        {ResourceType.Raport, "raport"},
+        {ResourceType.Altele, "altele"}
     };
     
     public static Dictionary<ProjectType, string> PROJECT_TYPE = new()

@@ -5,15 +5,17 @@ using MCMS.Files.Attributes;
 using MCMS.Files.Controllers;
 using MCMS.Files.Models;
 
-namespace CCOCBackend.API.Stacks.Reports;
-public class ReportFormModel : IFormModel
+namespace CCOCBackend.API.Stacks.Resources;
+public class ResourceFormModel : IFormModel
 {
     [FormlyCkEditor]
     public string Description { get; set; }
 
     public int Year { get; set; }
 
-    public ReportType Type { get; set; }
+    public ResourceType Type { get; set; }
+    
+    public string Authors { get; set; }
 
     [DisablePatchSubProperties]
     [FormlyFile(typeof(FilesAdminApiController), nameof(FilesAdminApiController.Upload), "unknown-purpose", "default")]

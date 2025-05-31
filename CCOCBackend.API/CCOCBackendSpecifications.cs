@@ -9,7 +9,7 @@ using CCOCBackend.API.Stacks.People;
 using CCOCBackend.API.Stacks.PersonTags;
 using CCOCBackend.API.Stacks.Projects;
 using CCOCBackend.API.Stacks.PTags;
-using CCOCBackend.API.Stacks.Reports;
+using CCOCBackend.API.Stacks.Resources;
 using CCOCBackend.API.Stacks.Services;
 using CCOCBackend.API.Stacks.Settings;
 using CCOCBackend.API.Stacks.Shortcuts;
@@ -92,12 +92,12 @@ public class CCOCBackendSpecifications : MSpecifications
         }.RequiresRoles("Admin"));
         config.Add(new MenuSection
         {
-            Name = "Rapoarte",
-            Id = "Reports",
+            Name = "Resurse",
+            Id = "Resources",
             IsCollapsable = true,
             Items =
             {
-                new MenuLink("Rapoarte", typeof(ReportsUiController)).WithIconClasses("fas fa-chart-line")
+                new MenuLink("Resurse", typeof(ResourcesUiController)).WithIconClasses("fas fa-chart-line")
             }
         }.RequiresRoles("Admin"));
         config.Add(new MenuSection

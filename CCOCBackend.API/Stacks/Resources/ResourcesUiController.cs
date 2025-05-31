@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 
-namespace CCOCBackend.API.Stacks.Reports;
+namespace CCOCBackend.API.Stacks.Resources;
 [Authorize(Roles = "Admin")]
 [Display(Name = "Reports")]
-public class ReportsUiController : GenericModalAdminUiController<ReportEntity, ReportFormModel, ReportViewModel, ReportsAdminApiController>
+public class ResourcesUiController : GenericModalAdminUiController<ResourceEntity, ResourceFormModel, ResourceViewModel, ResourcesAdminApiController>
 {
     public override void OnActionExecuting(ActionExecutingContext context)
     {
