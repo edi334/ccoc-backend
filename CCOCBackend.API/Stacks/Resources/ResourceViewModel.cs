@@ -11,11 +11,19 @@ public class ResourceViewModel : ViewModel
 {
     [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
     [DetailsField]
+    public string Title { get; set; }
+    
+    [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
+    [DetailsField]
     public int Year { get; set; }
 
     [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
     [DetailsField]
     public ResourceType Type { get; set; }
+    
+    [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
+    [DetailsField]
+    public string SubType { get; set; }
     
     [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
     [DetailsField]

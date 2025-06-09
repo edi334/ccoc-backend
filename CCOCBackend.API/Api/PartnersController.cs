@@ -36,7 +36,7 @@ public class PartnersController : ApiController
             {
                 Name = p.Name,
                 Image = FileHelper.GetImagePath(p.Image),
-                PartnerType = p.Type.Name
+                PartnerType = p.Type != null ? p.Type.Name : "Fără tip"
             };
 
             if (p.Link is not null)

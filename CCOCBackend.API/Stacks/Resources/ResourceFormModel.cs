@@ -8,12 +8,16 @@ using MCMS.Files.Models;
 namespace CCOCBackend.API.Stacks.Resources;
 public class ResourceFormModel : IFormModel
 {
+    public string Title { get; set; }
+    
     [FormlyCkEditor]
     public string Description { get; set; }
 
     public int Year { get; set; }
 
     public ResourceType Type { get; set; }
+    
+    public string Subtype { get; set; }
     
     public string Authors { get; set; }
 

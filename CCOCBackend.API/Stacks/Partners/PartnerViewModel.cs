@@ -32,7 +32,7 @@ public class PartnerViewModel : ViewModel
     [Display(Name = "Type")]
     [TableColumn(Orderable = ServerClient.Client, Searchable = ServerClient.Client)]
     [DetailsField]
-    public string TypeDisplay => Type.Name;
+    public string TypeDisplay => Type != null ? Type.Name : "Fără tip";
     
     [DetailsField(Hidden = true)]
     [JsonIgnore]

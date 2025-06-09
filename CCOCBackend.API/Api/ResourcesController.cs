@@ -36,7 +36,9 @@ public class ResourcesController : ApiController
                 Year = r.Year,
                 Type = EnumMapper.RESOURCE_TYPE[r.Type],
                 Authors = r.Authors,
-                File = FileHelper.GetImagePath(r.File)
+                File = FileHelper.GetImagePath(r.File),
+                Title = r.Title,
+                Subtype = r.Subtype
             }
         );
         
@@ -62,7 +64,9 @@ public class ResourcesController : ApiController
                 Year = r.Year,
                 Type = EnumMapper.RESOURCE_TYPE[r.Type],
                 Authors = r.Authors,
-                File = FileHelper.GetImagePath(r.File)
+                File = FileHelper.GetImagePath(r.File),
+                Title = r.Title,
+                Subtype = r.Subtype
             }
         );
         
